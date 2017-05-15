@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Angular • TodoMVC</title>
+        <link rel="stylesheet" href="css/app.css">
+    </head>
+    <body ng-app="todos" ng-controller="todosControl">
+        <section class="todoapp">
+            <header class="header">
+                <h1>todos</h1>
+                <form ng-submit="add()">
+                    <input class="new-todo" placeholder="What needs to be done?" autofocus ng-model="newTask">
+                </form>
+            </header>
+
+            <!-- 任务列表，当没有任务的时候这部分应该隐藏 -->
+            <section class="main" ng-show="tasks.length">
+                <input id="toggle-all" class="toggle-all" type="checkbox" ng-click="toggleAll()">
+                <label for="toggle-all">Mark all as complete</label>
+                <ul class="todo-list">
+                    <li ng-repeat="item in tasks | filter:flag track by $index" ng-class="{'editing':isEditing==item.id,'completed':item.completed}">
+                        <div class="view">
+                            <input class="toggle" type="checkbox" ng-model="item.completed" ng-change="toggleCompleted()">
+                            <label ng-bind="item.name" ng-dblclick="edit(item.id)"></label>
+                            <button class="destroy" ng-click="remove(item.id)"></button>
+                        </div>
+                        <form ng-submit="save()">
+                            <input class="edit" ng-model="item.name">
+                        </form>
+                    </li>
+
+                </ul>
+            </section>
+            <!-- 当没有任务时这里应该隐藏 -->
+            <footer class="footer" ng-show="tasks.length">
+                
+                <span class="todo-count"><strong>{{activeNum()}}</strong> item left</span>
+                
+                <ul class="filters">
+                    <li>
+                        <a class="selected" href="#/" ng-click="selectAll()">All</a>
+                    </li>
+                    <li>
+                        <a href="#/active" ng-click="selectActive()">Active</a>
+                    </li>
+                    <li>
+                        <a href="#/completed" ng-click="selectCompleted()">Completed</a>
+                    </li>
+                </ul>
+                
+                <button class="clear-completed" ng-click="clearAll()" ng-show="isShow()">Clear completed</button>
+            </footer>
+        </section>
+        <footer class="info">
+            
+        </footer>
+        
+        <script src="../node_modules/angular/angular.min.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>
