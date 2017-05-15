@@ -38,5 +38,12 @@ gulp.task('clean-file', function () {
 
 gulp.task("default",["clean-file","minify-html","minify-css","jsLint","minify-js"]);
 
+/*gulp.task('serve', ['clean-file'], function() {
+	browserSync.init({
+		server: "./app"
+	});
 
+	gulp.watch("app/scss/*.scss", ['sass']);
+	gulp.watch("app/*.html").on('change', browserSync.reload;);
+});*/
 
