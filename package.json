@@ -4,7 +4,8 @@
   "description": "this todomvc build by angular.js and localStorage",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp",
+    "start":"gulp serve"
   },
   "author": "faychou",
   "license": "ISC",

@@ -1,18 +1,9 @@
 var gulp = require("gulp"),
 	cleanCSS = require('gulp-clean-css'),
 	uglify = require("gulp-uglify"),
-	minifyHtml = require("gulp-minify-html"),
 	jshint = require("gulp-jshint"),
 	clean = require('gulp-clean'),
 	browserSync = require('browser-sync').create();
-
-gulp.task('minify-html', function () {
-	return gulp.src('src/*.html')
-	.pipe(minifyHtml())
-	.pipe(gulp.dest('dist'))
-	.pipe(browserSync.reload({stream:true}));
-});
-
 
 gulp.task('minify-css', function() {
 	return gulp.src('src/css/*.css')
@@ -41,9 +32,9 @@ gulp.task('clean-file', function () {
 		.pipe(browserSync.reload({stream:true}));
 });
 
-gulp.task("default",["clean-file","minify-html","minify-css","jsLint","minify-js"]);
+gulp.task("default",["clean-file","minify-css","jsLint","minify-js"]);
 
-gulp.task('serve', ["clean-file","minify-html","minify-css","jsLint","minify-js"], function() {
+gulp.task('serve', ["clean-file","minify-css","jsLint","minify-js"], function() {
 	browserSync.init({
 		server: {
 			baseDir: "./"
@@ -52,6 +43,6 @@ gulp.task('serve', ["clean-file","minify-html","minify-css","jsLint","minify-js"
 
 	gulp.watch("src/css/*.css", ['minify-css']);
 	gulp.watch("src/js/*.js", ['jsLint','minify-js']);
-	gulp.watch("src/*.html").on('change', browserSync.reload);
+	gulp.watch("*.html").on('change', browserSync.reload);
 });
 
